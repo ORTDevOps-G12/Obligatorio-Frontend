@@ -3,8 +3,7 @@ name: CI/CD Pipeline - Frontend
 on:
   push:
     branches:
-      - main  # Ajusta según tus ramas principales
-
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,12 +19,15 @@ jobs:
 
       - name: Build de la imagen Docker del frontend
         run: |
-          docker build -t nombre_de_tu_imagen_frontend:latest .
-          docker tag nombre_de_tu_imagen_frontend:latest nombre_de_tu_imagen_frontend:latest
+          docker build -t vue_frontend:latest .
+          docker tag vue_frontend:latest vue_frontend:latest
 
-      - name: Guardar imagen Docker como artifact
+      - name: Save Docker image as artifact
+        run: |
+          docker save vue_frontend:latest | gzip > vue_frontend-latest.tar.gz
+
+      - name: Upload Docker image as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: frontend-docker-image
-          path: |
-            ${{ github.workspace }}/nombre_de_tu_imagen_frontend_latest.tar.gz
+          name: vue_frontend-docker-image
+          path: vue_frontend-latest.tar.gz

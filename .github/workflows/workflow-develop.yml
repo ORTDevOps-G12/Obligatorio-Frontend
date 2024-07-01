@@ -14,8 +14,8 @@ jobs:
 
       - name: Ejecutar script de construcción
         run: |
-          chmod +x ./build.sh
-          ./build.sh
+          chmod +x .github/scripts/build.sh
+          ./.github/scripts/build.sh
 
       - name: Build de la imagen Docker del frontend
         run: |

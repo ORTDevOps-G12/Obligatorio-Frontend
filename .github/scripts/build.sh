@@ -4,5 +4,8 @@ set -e
 # Instalar dependencias
 npm install
 
-# Construir la aplicación React
-npm run build --prod
+# Compilar la aplicación
+npm run build
+
+# Mover archivos compilados a un directorio de salida
+mv ./dist ./out

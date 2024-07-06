@@ -1,11 +1,24 @@
-name: CI/CD Pipeline - Develop
+name: CI/CD Pipeline - Frontend
+
 
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Ejecutar script de construcción
+        run: |
+          chmod +x .github/scripts/build.sh
+          ./.github/scripts/build.sh
+  
   docker-build:
     runs-on: ubuntu-latest
     

@@ -1,23 +1,20 @@
-# Usa una imagen base de Node.js
-FROM node:14
+# Use the official Node.js 18 image as a base
+FROM node:18-alpine
 
-# Establece el directorio de trabajo
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copia el package.json y package-lock.json (si existe)
-COPY package*.json ./
+# Copy package.json and package-lock.json into the container
+COPY package.json package-lock.json ./
 
-# Instala las dependencias
+# Install dependencies
 RUN npm install
 
-# Copia el resto de los archivos de la aplicación
+# Copy the rest of the application code
 COPY . .
 
-# Construye la aplicación
-RUN npm run build
-
-# Exponer el puerto en el que la aplicación va a correr
+# Expose the port the app runs on
 EXPOSE 4200
 
-# Comando para iniciar la aplicación
-CMD ["npm", "start"]
+# Start the application
+CMD ["npm", "run", "start"]
